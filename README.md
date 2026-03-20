@@ -12,7 +12,7 @@ Trabalho desenvolvido para a disciplina de **Linguagens Formais e Computabilidad
 
 O analisador foi construído com base nas seguintes regras de produção[cite: 22, 23]:
 
-1.  **$E \rightarrow (E~Op~E)$**
+1.  **$E \rightarrow (E Op E)$**
 2.  **$E \rightarrow a$**
 3.  **$Op \rightarrow + \mid - \mid * \mid /$**
 
