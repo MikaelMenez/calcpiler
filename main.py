@@ -63,13 +63,21 @@ def parseExpr(expr: str, lista=[]) -> tuple[Expr, str, list] | None:
         return None
 
 
-"""
-E → (E Op E)
-E → a
-Op → + | − | ∗ | /
+def main():
+    while True:
+        expr = input("Digite a expressão a ser analisada: ")
+        parsed = parseExpr(expr)
+        if parsed is None:
+            print("Expressão inválida!\n")
+        else:
+            expression, rest, transactions = parsed
+            if rest.strip() != "":
+                print("Expressão inválida!\n")
+            else:
+                print(f"Expressão a ser analisada: {expression}\n")
+                for trans in transactions:
+                    print(f"{trans}\n")
 
-(((a+a)+a)+a)
 
-E->(((a + a) + a) +a)
-
-"""
+if __name__ == "__main__":
+    main()
