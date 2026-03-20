@@ -30,33 +30,46 @@ def parseOp(expr: str) -> tuple[str, str] | None:
         return None
 
 
-def parseExpr(expr: str) -> tuple[Expr, str] | None:
+def parseExpr(expr: str, lista=[]) -> tuple[Expr, str, list] | None:
+
     if expr == "":
         return None
     if expr[0] == "a":
-        return (Var(), expr[1:])
+        lista.insert(0, "E -> a")
+        return (Var(), expr[1:], lista)
     if expr[0] == "(":
         result = parseExpr(expr[1:])
         match result:
             case None:
                 return None
-            case (e1, resto1):
+            case (e1, resto1, _):
                 result2 = parseOp(resto1)
                 match result2:
                     case None:
                         return None
                     case (op, resto2):
+                        lista.insert(0, f"Op -> {op}")
                         result3 = parseExpr(resto2)
                         match result3:
                             case None:
                                 return None
-                            case (e2, resto3):
+                            case (e2, resto3, _):
                                 if resto3[0] == ")":
-                                    return (
-                                        Node(e1, op, e2),
-                                        resto3[1:],
-                                    )
+                                    lista.insert(0, "E -> (E Op E)")
+                                    return (Node(e1, op, e2), resto3[1:], lista)
                                 else:
                                     return None
     else:
         return None
+
+
+"""
+E → (E Op E)
+E → a
+Op → + | − | ∗ | /
+
+(((a+a)+a)+a)
+
+E->(((a + a) + a) +a)
+
+"""
