@@ -1,8 +1,5 @@
-from ast import Tuple
 from dataclasses import dataclass
 
-
-# data Expr = Var | Node Expr Char Expr
 class Expr:
     pass
 
