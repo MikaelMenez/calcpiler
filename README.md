@@ -1,5 +1,3 @@
-[cite_start]Aqui está uma proposta de **README.md** profissional, organizada e focada nos requisitos da sua atividade de Linguagens Formais[cite: 5, 21]. Ele explica tanto a teoria quanto a prática da sua implementação.
-
 ---
 
 # Analisador Sintático de Expressões Aritméticas 🧮
