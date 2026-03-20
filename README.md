@@ -4,7 +4,7 @@
 
 [cite_start]Este projeto consiste na implementação de um **Analisador Sintático Descendente Recursivo** para uma Gramática Livre de Contexto (GLC) simples[cite: 13, 19, 38]. [cite_start]O objetivo é validar expressões e demonstrar sua estrutura através de sequências de derivação[cite: 37, 44].
 
-[cite_start]Trabalho desenvolvido para a disciplina de **Linguagens Formais e Computabilidade** da **UFPB**[cite: 1, 3].
+[cite_start]Trabalho desenvolvido para a disciplina de **Linguagens Formais e Computabilidade** da **UFPB**.
 
 ## 📋 A Gramática
 
