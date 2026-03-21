@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 class Expr:
     pass
 
@@ -27,7 +28,7 @@ def parseOp(expr: str) -> tuple[str, str] | None:
         return None
 
 
-def parseExpr(expr: str, lista=[]) -> tuple[Expr, str, list] | None:
+def parseExpr(expr: str, lista: list) -> tuple[Expr, str, list] | None:
 
     if expr == "":
         return None
@@ -35,7 +36,7 @@ def parseExpr(expr: str, lista=[]) -> tuple[Expr, str, list] | None:
         lista.insert(0, "E -> a")
         return (Var(), expr[1:], lista)
     if expr[0] == "(":
-        result = parseExpr(expr[1:])
+        result = parseExpr(expr[1:], lista)
         match result:
             case None:
                 return None
@@ -46,7 +47,7 @@ def parseExpr(expr: str, lista=[]) -> tuple[Expr, str, list] | None:
                         return None
                     case (op, resto2):
                         lista.insert(0, f"Op -> {op}")
-                        result3 = parseExpr(resto2)
+                        result3 = parseExpr(resto2, lista)
                         match result3:
                             case None:
                                 return None
@@ -63,7 +64,8 @@ def parseExpr(expr: str, lista=[]) -> tuple[Expr, str, list] | None:
 def main():
     while True:
         expr = input("Digite a expressão a ser analisada: ")
-        parsed = parseExpr(expr)
+        lista = []
+        parsed = parseExpr(expr, lista)
         if parsed is None:
             print("Expressão inválida!\n")
         else:
