@@ -35,29 +35,32 @@ def parseExpr(expr: str, lista: list) -> tuple[Expr, str, list] | None:
     if expr[0] == "a":
         lista.insert(0, "E -> a")
         return (Var(), expr[1:], lista)
-    if expr[0] == "(":
-        result = parseExpr(expr[1:], lista)
-        match result:
-            case None:
-                return None
-            case (e1, resto1, _):
-                result2 = parseOp(resto1)
-                match result2:
-                    case None:
-                        return None
-                    case (op, resto2):
-                        lista.insert(0, f"Op -> {op}")
-                        result3 = parseExpr(resto2, lista)
-                        match result3:
-                            case None:
-                                return None
-                            case (e2, resto3, _):
-                                if resto3[0] == ")":
-                                    lista.insert(0, "E -> (E Op E)")
-                                    return (Node(e1, op, e2), resto3[1:], lista)
-                                else:
+    try:
+        if expr[0] == "(":
+            result = parseExpr(expr[1:], lista)
+            match result:
+                case None:
+                    return None
+                case (e1, resto1, _):
+                    result2 = parseOp(resto1)
+                    match result2:
+                        case None:
+                            return None
+                        case (op, resto2):
+                            lista.insert(0, f"Op -> {op}")
+                            result3 = parseExpr(resto2, lista)
+                            match result3:
+                                case None:
                                     return None
-    else:
+                                case (e2, resto3, _):
+                                    if resto3[0] == ")":
+                                        lista.insert(0, "E -> (E Op E)")
+                                        return (Node(e1, op, e2), resto3[1:], lista)
+                                    else:
+                                        return None
+        else:
+            return None
+    except IndexError:
         return None
 
 
